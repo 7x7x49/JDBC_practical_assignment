@@ -56,7 +56,7 @@ public class H2TestRunner {
     private static void startJarIfPresent() throws IOException {
         File jar = Path.of(JAR_FILE).toFile();
         if (!jar.exists()) { //На случай, если файл уже запущен
-            System.out.println("Jar not found at '" + JAR_FILE + "'. Предполагаем, что вы запустили его вручную.");
+            System.out.println("Jar-файл '" + JAR_FILE + "'не найден. Вероятно, Вы запустили его вручную.");
             return;
         }
         System.out.println("Запуск файла " + JAR_FILE + "...");
@@ -65,7 +65,7 @@ public class H2TestRunner {
         jarProcess = pb.start();
     }
 
-    //Выключение jar файла
+    //Выключение jar-файла
     private static void stopJarIfStarted() {
         if (jarProcess != null && jarProcess.isAlive()) {
             jarProcess.destroy();
@@ -80,7 +80,7 @@ public class H2TestRunner {
         }
 
         List<TestCase> tests = parseExcel(excelPath, sheetName);
-        System.out.println("\u001B[35m" + "Найдено " + tests.size() + " шагов..." + "\u001B[0m");
+        System.out.println("\u001B[35m" + "Найдено " + tests.size() + " тестов..." + "\u001B[0m");
 
         try (Connection conn = DriverManager.getConnection(JDBC_URL, JDBC_USER, JDBC_PASS)) {
             for (TestCase tc : tests) {
